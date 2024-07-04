@@ -2,6 +2,7 @@
 
 [GSITM 4기] 스터디 4조의 협업 공간입니다.
 Spring Boot, JPA, MyBatis를 사용한 관광지 소개 서비스입니다.
+`https://www.notion.so/developing-jihye/API-tourism-introduction-service-6f5f0ec06ae84b408acc7f892aaf608b`
 
 &nbsp;
 ## 목차
@@ -12,7 +13,6 @@ Spring Boot, JPA, MyBatis를 사용한 관광지 소개 서비스입니다.
 - [설치](#설치)
 - [사용법](#사용법)
 - [기여](#기여)
-- [API 문서 (노션)](#API-문서)
 
 &nbsp;
 ## 소개
@@ -78,7 +78,3 @@ Spring Boot, JPA, MyBatis를 사용한 관광지 소개 서비스입니다.
 3. 변경 사항을 커밋합니다 (`git commit -am 'Add some feature'`).
 4. 브랜치에 푸시합니다 (`git push origin feature/my-new-feature`).
 5. 새 풀 리퀘스트를 만듭니다.
-
-&nbsp;
-## API 문서
-`https://www.notion.so/developing-jihye/API-tourism-introduction-service-6f5f0ec06ae84b408acc7f892aaf608b`
