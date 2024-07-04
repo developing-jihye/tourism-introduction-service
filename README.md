@@ -18,9 +18,6 @@ Spring Boot, JPA, MyBatis를 사용한 관광지 소개 서비스입니다.
 
 이 프로젝트는 관광지를 소개하기 위해 설계된 웹 애플리케이션입니다. 사용자 인증, 장소 리뷰, 카테고리 기반 검색 등의 기능을 포함하고 있습니다.
 
-- API 정리 (노션)
-`https://www.notion.so/developing-jihye/API-tourism-introduction-service-6f5f0ec06ae84b408acc7f892aaf608b`
-
 &nbsp;
 ## 기능
 
@@ -79,3 +76,7 @@ Spring Boot, JPA, MyBatis를 사용한 관광지 소개 서비스입니다.
 3. 변경 사항을 커밋합니다 (`git commit -am 'Add some feature'`).
 4. 브랜치에 푸시합니다 (`git push origin feature/my-new-feature`).
 5. 새 풀 리퀘스트를 만듭니다.
+
+&nbsp;
+## API 문서 (노션)
+`https://www.notion.so/developing-jihye/API-tourism-introduction-service-6f5f0ec06ae84b408acc7f892aaf608b`
