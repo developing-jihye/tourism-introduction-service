@@ -3,7 +3,7 @@
 [GSITM 4기] 스터디 4조 tours 의 협업 공간입니다.
 Spring Boot, JPA, MyBatis를 사용한 관광지 소개 서비스입니다. 
 <br/>
-[4조 회의록 바로가기](https://www.notion.so/developing-jihye/API-tourism-introduction-service-6f5f0ec06ae84b408acc7f892aaf608b) 📋
+[4조 회의록 바로가기](https://developing-jihye.notion.site/tours-tourism-introduction-service-6f5f0ec06ae84b408acc7f892aaf608b) 📋
 
 ## 목차 📑
 
@@ -40,7 +40,6 @@ Spring Boot, JPA, MyBatis를 사용한 관광지 소개 서비스입니다.
 1. 레포지토리를 클론합니다:
     ```bash
     git clone https://github.com/your-username/tourism-introduction-service.git
-    cd tourism-introduction-service
     ```
 
 2. 데이터베이스를 설정합니다:
