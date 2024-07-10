@@ -1,4 +1,4 @@
-package tours.tourism;
+package tours.tourism.place;
 
 public enum Category {
     자연관광지,
