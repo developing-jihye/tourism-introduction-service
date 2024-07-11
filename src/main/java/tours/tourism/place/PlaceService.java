@@ -1,6 +1,7 @@
 package tours.tourism.place;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -47,6 +48,7 @@ public class PlaceService {
     }
 
     //수정
+    @Transactional
     public void update(Long id, UpdateRequestDto request) {
         Place place =  placeRepository.findById(id).orElse(null);
         if(place == null){

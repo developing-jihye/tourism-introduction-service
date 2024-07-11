@@ -28,7 +28,7 @@ public class PlaceController {
 
     //수정
     @PutMapping("/place/{placeId}")
-    public void update(@PathVariable Long id , @RequestBody UpdateRequestDto request){
+    public void update( @PathVariable Long id ,@Valid @RequestBody UpdateRequestDto request){
         placeService.update(id,request);
     }
 
