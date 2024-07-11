@@ -1,6 +1,7 @@
 package tours.tourism.place;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -78,5 +79,17 @@ public class Place {
 
     public double getRating() {
         return rating;
+    }
+
+    public Place(String name, String imageUrl, String address, String time, String description, String phoneNumber, City city, Category category, String website) {
+        this.name = name;
+        this.imageUrl = imageUrl;
+        this.address = address;
+        this.time = time;
+        this.description = description;
+        this.phoneNumber = phoneNumber;
+        this.city = city;
+        this.category = category;
+        this.website = website;
     }
 }
