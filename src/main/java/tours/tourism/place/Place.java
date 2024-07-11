@@ -33,6 +33,9 @@ public class Place {
 
     private double rating;
 
+    public Place() {
+    }
+
     public Long getId() {
         return id;
     }
