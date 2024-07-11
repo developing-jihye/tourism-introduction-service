@@ -1,10 +1,7 @@
 package tours.tourism.place;
 
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,6 +24,12 @@ public class PlaceController {
     @GetMapping("/places")
     List<PlaceResponseDto> findAll(){
         return placeService.findAll();
+    }
+
+    //수정
+    @PutMapping("/place/{placeId}")
+    public void update(@PathVariable Long id , @RequestBody UpdateRequestDto request){
+        placeService.update(id,request);
     }
 
 
