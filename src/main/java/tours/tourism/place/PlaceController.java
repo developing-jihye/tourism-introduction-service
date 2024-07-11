@@ -16,7 +16,7 @@ public class PlaceController {
 
     //등록
     @PostMapping("/place")
-    public CreateRequestDto create(@Valid @RequestBody CreateRequestDto request){
+    public String create(@Valid @RequestBody CreateRequestDto request){
         return placeService.create(request);
     }
 
@@ -28,8 +28,8 @@ public class PlaceController {
 
     //수정
     @PutMapping("/place/{placeId}")
-    public void update( @PathVariable Long id ,@Valid @RequestBody UpdateRequestDto request){
-        placeService.update(id,request);
+    public String update( @PathVariable Long id ,@Valid @RequestBody UpdateRequestDto request){
+        return placeService.update(id,request);
     }
 
 

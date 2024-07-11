@@ -16,7 +16,8 @@ public class PlaceService {
     }
 
     //등록
-    public CreateRequestDto create(CreateRequestDto request) {
+    public String create(CreateRequestDto request) {
+
        Place place = new Place(
                request.name(),
                request.imageUrl(),
@@ -38,7 +39,8 @@ public class PlaceService {
                 place.getCategory(),
                 place.getWebsite());
 
-        return create1;
+
+        return "등록 완료되었습니다.";
     }
 
     //목록 조회
@@ -61,7 +63,7 @@ public class PlaceService {
 
     //수정
     @Transactional
-    public void update(Long id, UpdateRequestDto request) {
+    public String update(Long id, UpdateRequestDto request) {
         Place place =  placeRepository.findById(id).orElse(null);
         if(place == null){
             throw new NoSuchElementException("장소를 찾을 수 없습니다.");
@@ -77,5 +79,6 @@ public class PlaceService {
                 request.category(),
                 request.website()
         );
+        return "수정 완료되었습니다.";
     }
 }
