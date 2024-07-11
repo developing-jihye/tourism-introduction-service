@@ -1,11 +1,9 @@
 package tours.tourism.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "Users")
 public class User {
 
     @Id
@@ -17,6 +15,9 @@ public class User {
     private String password;
 
     private String email;
+
+    public User() {
+    }
 
     public User(Long id, String username, String password, String email) {
         this.id = id;
