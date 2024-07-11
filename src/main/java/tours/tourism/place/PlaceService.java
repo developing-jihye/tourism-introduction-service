@@ -29,4 +29,12 @@ public class PlaceService {
                         place.getAddress()
                 )).toList();
     }
+
+    public void deleteById(Long placeId) {
+
+    }
+
+    public PlaceDetailResponseDto findById() {
+        return null;
+    }
 }

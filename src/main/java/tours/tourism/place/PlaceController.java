@@ -1,6 +1,8 @@
 package tours.tourism.place;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,6 +19,16 @@ public class PlaceController {
     @GetMapping("/places")
     List<PlaceResponseDto> findAll(){
         return placeService.findAll();
+    }
+
+    @DeleteMapping("place/{placeId}")
+    public void delete(@PathVariable Long placeId){
+        placeService.deleteById(placeId);
+    }
+
+    @GetMapping("place/{placeId}")
+    public PlaceDetailResponseDto findById(@PathVariable Long placeId){
+      return placeService.findById();
     }
 
 }
