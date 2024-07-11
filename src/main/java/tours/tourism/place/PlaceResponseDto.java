@@ -12,7 +12,7 @@ public record PlaceResponseDto(
 
         Double rating,
 
-        LocalDateTime time,
+        String time,
 
         String PhoneNumber,
 

@@ -28,7 +28,7 @@ public class Place {
 
     private double rating;
 
-    private LocalDateTime time;
+    private String time;
 
 
     public Long getId() {
@@ -67,7 +67,7 @@ public class Place {
         return rating;
     }
 
-    public LocalDateTime getTime() {
+    public String getTime() {
         return time;
     }
 }
