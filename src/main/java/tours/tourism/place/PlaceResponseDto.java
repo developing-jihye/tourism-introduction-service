@@ -17,11 +17,13 @@ public record PlaceResponseDto(
         String PhoneNumber,
 
         @NotNull
-        String city,
+        City city,
 
         @NotNull
         Category category,
 
-        String website
+        String website,
+
+        String address
 ) {
 }

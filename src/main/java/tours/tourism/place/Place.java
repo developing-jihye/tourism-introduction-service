@@ -15,11 +15,16 @@ public class Place {
 
     private String imageUrl;
 
+    private String address;
+
+    private String time;
+
     private String description;
 
     private String phoneNumber;
 
-    private String city;
+    @Enumerated(EnumType.STRING)
+    private City city;
 
     @Enumerated(EnumType.STRING)
     private Category category;
@@ -27,9 +32,6 @@ public class Place {
     private String website;
 
     private double rating;
-
-    private String time;
-
 
     public Long getId() {
         return id;
@@ -43,6 +45,14 @@ public class Place {
         return imageUrl;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -51,7 +61,7 @@ public class Place {
         return phoneNumber;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
@@ -65,9 +75,5 @@ public class Place {
 
     public double getRating() {
         return rating;
-    }
-
-    public String getTime() {
-        return time;
     }
 }

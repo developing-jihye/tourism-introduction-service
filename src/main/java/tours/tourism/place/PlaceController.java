@@ -14,7 +14,7 @@ public class PlaceController {
         this.placeService = placeService;
     }
 
-    @GetMapping("/place")
+    @GetMapping("/places")
     List<PlaceResponseDto> findAll(){
         return placeService.findAll();
     }
