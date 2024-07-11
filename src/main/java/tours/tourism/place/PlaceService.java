@@ -16,17 +16,29 @@ public class PlaceService {
     }
 
     //등록
-    public void create(CreateRequestDto request) {
-        placeRepository.save(new Place(request.name(),
-                        request.imageUrl(),
-                        request.address(),
-                        request.time(),
-                        request.description(),
-                        request.phoneNumber(),
-                        request.city(),
-                        request.category(),
-                        request.website())
-                );
+    public CreateRequestDto create(CreateRequestDto request) {
+       Place place = new Place(
+               request.name(),
+               request.imageUrl(),
+               request.address(),
+               request.time(),
+               request.description(),
+               request.phoneNumber(),
+               request.city(),
+               request.category(),
+               request.website());
+        CreateRequestDto create1 =  new CreateRequestDto(
+                place.getName(),
+                place.getImageUrl(),
+                place.getAddress(),
+                place.getTime(),
+                place.getDescription(),
+                place.getPhoneNumber(),
+                place.getCity(),
+                place.getCategory(),
+                place.getWebsite());
+
+        return create1;
     }
 
     //목록 조회

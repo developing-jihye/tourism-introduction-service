@@ -16,8 +16,8 @@ public class PlaceController {
 
     //등록
     @PostMapping("/place")
-    public void create(@Valid @RequestBody CreateRequestDto request){
-        placeService.create(request);
+    public CreateRequestDto create(@Valid @RequestBody CreateRequestDto request){
+        return placeService.create(request);
     }
 
     //목록 조회
