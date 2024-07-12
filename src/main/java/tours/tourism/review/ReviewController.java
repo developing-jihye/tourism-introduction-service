@@ -3,7 +3,7 @@ package tours.tourism.review;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/review")
+@RequestMapping("/{placeId}")
 public class ReviewController {
 
     private final ReviewService reviewService;
