@@ -15,6 +15,21 @@ public class PlaceService {
         this.placeRepository = placeRepository;
     }
 
+    //등록
+    public void create(CreateRequestDto request) {
+        placeRepository.save(new Place(request.name(),
+                request.imageUrl(),
+                request.address(),
+                request.time(),
+                request.description(),
+                request.phoneNumber(),
+                request.city(),
+                request.category(),
+                request.website())
+        );
+    }
+
+    //목록 조회
     public List<PlaceResponseDto> findAll() {
         return placeRepository
                 .findAll()
@@ -30,20 +45,6 @@ public class PlaceService {
                         place.getWebsite(),
                         place.getAddress()
                 )).toList();
-    }
-
-    //등록
-    public void create(CreateRequestDto request) {
-        placeRepository.save(new Place(request.name(),
-                request.imageUrl(),
-                request.address(),
-                request.time(),
-                request.description(),
-                request.phoneNumber(),
-                request.city(),
-                request.category(),
-                request.website())
-        );
     }
 
     //수정
