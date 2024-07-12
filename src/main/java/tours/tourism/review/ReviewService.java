@@ -22,8 +22,7 @@ public class ReviewService {
     // 리뷰 등록
     public ReviewResponseDTO create(ReviewCreateRequestDTO request) {
 
-        Place place = placeRepository.findById(request.placeId())
-                .orElse(null);
+        Place place = new Place();
 
         User user = new User();
 
