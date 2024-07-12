@@ -18,6 +18,7 @@ public class Place {
 
     private String address;
 
+    @Column(name = "times")
     private String time;
 
     private String description;
@@ -32,7 +33,7 @@ public class Place {
 
     private String website;
 
-    private double rating;
+    private Double rating;
 
     public Place() {
     }
