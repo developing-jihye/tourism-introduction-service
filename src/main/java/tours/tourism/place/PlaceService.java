@@ -77,7 +77,7 @@ public class PlaceService {
         Place place =placeRepository.findById(placeId).orElse(null);
 
         if (place ==null){
-            throw new NoSuchElementException("장소를 찾울 수 없습니다.");
+            throw new NoSuchElementException("장소를 찾을 수 없습니다.");
         }
 
         return new PlaceDetailResponseDto(
