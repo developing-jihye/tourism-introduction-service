@@ -1,5 +1,6 @@
 package tours.tourism.review;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,7 +15,7 @@ public class ReviewController {
 
     // 리뷰 등록
     @PostMapping
-    ReviewResponseDTO create(@RequestBody ReviewCreateRequestDTO request) {
+    ReviewResponseDTO create(@Valid @RequestBody ReviewCreateRequestDTO request) {
 
         return reviewService.create(request);
     }
