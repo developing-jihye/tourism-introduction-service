@@ -25,10 +25,6 @@ public class ReviewService {
         Place place = placeRepository.findById(request.placeId())
                 .orElse(null);
 
-        if (place == null) {
-            throw new NoSuchElementException("해당 하는 아이디의 장소가 존재하지 않습니다.");
-        }
-
         User user = new User();
 
         Review review = new Review(
