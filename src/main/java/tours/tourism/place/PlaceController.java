@@ -28,8 +28,22 @@ public class PlaceController {
 
     //수정
     @PutMapping("/place/{placeId}")
-    public void update(@PathVariable Long id , @RequestBody UpdateRequestDto request){
-        placeService.update(id,request);
+    public Place update(@PathVariable Long id , @RequestBody UpdateRequestDto request){
+       Place place= placeService.update(id,request);
+       return place;
+    }
+
+    //삭제
+    @DeleteMapping("/place/{placeId}")
+    public void delete(@PathVariable Long placeId){
+        placeService.deleteById(placeId);
+    }
+
+    //상세조회
+    @GetMapping("place/{placeId}")
+    public PlaceDetailResponseDto findById(@PathVariable Long placeId){
+         PlaceDetailResponseDto dto = placeService.findById(placeId);
+         return dto;
     }
 
 
