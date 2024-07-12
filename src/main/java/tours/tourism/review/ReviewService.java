@@ -46,4 +46,23 @@ public class ReviewService {
                 reviewSave.getPlace().getName()
         );
     }
+
+    @Transactional
+    // 리뷰 수정
+    public String updateReview(Long reviewId, ReviewUpdateRequestDTO request) {
+
+        Review review = reviewRepository.findById(reviewId)
+                .orElse(null);
+
+        if (review == null) {
+            throw new NoSuchElementException("해당 리뷰가 존재하지 않습니다. 리뷰 ID" + reviewId);
+        }
+
+        review.reviewUpdate(
+                request.rating(),
+                request.comment()
+        );
+
+        return "수정 완료 되었습니다";
+    }
 }

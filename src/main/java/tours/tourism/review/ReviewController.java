@@ -18,4 +18,14 @@ public class ReviewController {
 
         return reviewService.create(request);
     }
+
+    // 리뷰 수정
+    @PutMapping("/{reviewId}")
+    public String updateReview(
+            @PathVariable("reviewId") Long reviewId,
+            @RequestBody ReviewUpdateRequestDTO request) {
+
+        return reviewService.updateReview(reviewId, request);
+    }
+
 }
