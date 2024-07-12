@@ -19,4 +19,31 @@ public class ReviewService {
         this.placeRepository = placeRepository;
     }
 
+    // 리뷰 등록
+    public ReviewResponseDTO create(ReviewCreateRequestDTO request) {
+
+        Place place = placeRepository.findById(request.placeId())
+                .orElse(null);
+
+        if (place == null) {
+            throw new NoSuchElementException("해당 하는 아이디의 장소가 존재하지 않습니다.");
+        }
+
+        User user = new User();
+
+        Review review = new Review(
+                request.rating(),
+                request.comment(),
+                user,
+                place
+        );
+
+        Review reviewSave = reviewRepository.save(review);
+
+        return new ReviewResponseDTO(
+                reviewSave.getRating(),
+                reviewSave.getComment(),
+                reviewSave.getPlace().getName()
+        );
+    }
 }

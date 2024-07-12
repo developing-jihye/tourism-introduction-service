@@ -12,5 +12,10 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
+    // 리뷰 등록
+    @PostMapping
+    ReviewResponseDTO create(@RequestBody ReviewCreateRequestDTO request) {
 
+        return reviewService.create(request);
+    }
 }
