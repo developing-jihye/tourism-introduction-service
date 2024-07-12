@@ -51,8 +51,8 @@ public class Review {
         return user;
     }
 
+    // 리뷰 수정 함수
     public void reviewUpdate(Double rating, String comment) {
-
         this.rating = rating;
         this.comment = comment;
     }
