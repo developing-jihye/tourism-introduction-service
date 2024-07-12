@@ -28,4 +28,11 @@ public class ReviewController {
         return reviewService.updateReview(reviewId, request);
     }
 
+    // 리뷰 삭제
+    @DeleteMapping("/{reviewId}")
+    public String deleteReview(@PathVariable("reviewId") Long reviewId) {
+
+        return reviewService.deleteReview(reviewId);
+    }
+
 }

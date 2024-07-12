@@ -65,4 +65,17 @@ public class ReviewService {
 
         return "수정 완료 되었습니다";
     }
+
+    @Transactional
+    // 리뷰 삭제
+    public String deleteReview(Long reviewId) {
+
+        if (reviewId == null) {
+            throw new NoSuchElementException("해당하는 리뷰가 존재하지 않습니다");
+        }
+
+        reviewRepository.deleteById(reviewId);
+
+        return "리뷰가 삭제되었습니다";
+    }
 }
