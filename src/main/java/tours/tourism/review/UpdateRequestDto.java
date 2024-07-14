@@ -1,6 +1,6 @@
 package tours.tourism.review;
 
-public record ReviewUpdateRequestDTO(
+public record UpdateRequestDto(
         Double rating,
         String comment
 ) {
