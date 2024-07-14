@@ -20,7 +20,7 @@ public class ReviewService {
     }
 
     // 리뷰 등록
-    public ReviewResponseDTO create(ReviewCreateRequestDTO request) {
+    public ReviewResponseDTO create(CreateRequestDto request) {
 
         Place place = new Place();
 
@@ -44,7 +44,7 @@ public class ReviewService {
 
     @Transactional
     // 리뷰 수정
-    public String updateReview(Long reviewId, ReviewUpdateRequestDTO request) {
+    public UpdateResponseDto updateReview(Long reviewId, UpdateRequestDto request) {
 
         Review review = reviewRepository.findById(reviewId)
                 .orElse(null);
@@ -58,7 +58,11 @@ public class ReviewService {
                 request.comment()
         );
 
-        return "수정 완료 되었습니다";
+        return new UpdateResponseDto(
+                review.getRating(),
+                review.getComment(),
+                review.getPlace().getName()
+        );
     }
 
     @Transactional
