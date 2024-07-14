@@ -15,16 +15,16 @@ public class ReviewController {
 
     // 리뷰 등록
     @PostMapping
-    ReviewResponseDTO create(@Valid @RequestBody ReviewCreateRequestDTO request) {
+    ReviewResponseDTO create(@Valid @RequestBody CreateRequestDto request) {
 
         return reviewService.create(request);
     }
 
     // 리뷰 수정
     @PutMapping("/{reviewId}")
-    public String updateReview(
+    public UpdateResponseDto updateReview(
             @PathVariable("reviewId") Long reviewId,
-            @RequestBody ReviewUpdateRequestDTO request) {
+            @RequestBody UpdateRequestDto request) {
 
         return reviewService.updateReview(reviewId, request);
     }
