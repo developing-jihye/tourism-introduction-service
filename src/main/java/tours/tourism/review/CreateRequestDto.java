@@ -1,9 +1,8 @@
 package tours.tourism.review;
 
 import jakarta.validation.constraints.NotNull;
-import tours.tourism.place.Place;
 
-public record ReviewCreateRequestDTO(
+public record CreateRequestDto(
         @NotNull Double rating,
         @NotNull String comment,
         @NotNull Long userId
