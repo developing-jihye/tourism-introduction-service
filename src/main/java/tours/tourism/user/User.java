@@ -41,4 +41,9 @@ public class User {
     public String getEmail() {
         return email;
     }
+
+    // 비밀번호 같은지 확인하는 함수
+    public boolean authenticate(String password) {
+        return this.password.equals(password);
+    }
 }
