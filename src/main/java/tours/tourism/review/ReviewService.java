@@ -6,7 +6,9 @@ import tours.tourism.place.Place;
 import tours.tourism.place.PlaceRepository;
 import tours.tourism.user.User;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.OptionalDouble;
 
 @Service
 public class ReviewService {
@@ -76,5 +78,18 @@ public class ReviewService {
         reviewRepository.deleteById(reviewId);
 
         return "리뷰가 삭제되었습니다";
+    }
+
+    public double calculateAverageRating(Long placeId) {
+
+        List<Review> reviews = reviewRepository.findByPlaceId(placeId);
+
+        OptionalDouble average = reviews.stream()
+                .mapToDouble(Review::getRating)
+                .average();
+
+        double arr =average.isPresent() ? average.getAsDouble() : 0.0;
+        return Math.round(arr*1000) / 1000.0;
+
     }
 }
