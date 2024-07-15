@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/{placeId}")
+@RequestMapping("/review")
 public class ReviewController {
 
     private final ReviewService reviewService;
