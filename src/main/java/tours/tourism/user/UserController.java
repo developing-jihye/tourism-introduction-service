@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/join")
 public class UserController {
 
     private final UserService userService;
@@ -18,7 +17,7 @@ public class UserController {
     }
 
     // 회원 가입
-    @PostMapping
+    @PostMapping("/join")
     public void register(@Valid @RequestBody CreateRequestDto request) {
         userService.register(request);
     }
