@@ -20,16 +20,28 @@ public class PlaceController {
         return placeService.create(request);
     }
 
+    //수정
+    @PutMapping("/place/{placeId}")
+    public String update(@PathVariable Long placeId ,@Valid @RequestBody UpdateRequestDto request){
+        return placeService.update(placeId,request);
+    }
+
     //목록 조회
     @GetMapping("/places")
     List<PlaceResponseDto> findAll(){
         return placeService.findAll();
     }
 
-    //수정
-    @PutMapping("/place/{placeId}")
-    public String update( @PathVariable Long id ,@Valid @RequestBody UpdateRequestDto request){
-        return placeService.update(id,request);
+    //상세 조회
+    @GetMapping("/places/{placeId}")
+    PlaceDetailResponseDto findById(@PathVariable Long placeId){
+        return placeService.findById(placeId);
+    }
+
+    //삭제
+    @DeleteMapping("/place/{placeId}")
+    void delete(@PathVariable Long placeId){
+        placeService.deleteById(placeId);
     }
 
 

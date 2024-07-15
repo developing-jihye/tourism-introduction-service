@@ -32,24 +32,6 @@ public class PlaceService {
         return "등록 완료되었습니다.";
     }
 
-    //목록 조회
-    public List<PlaceResponseDto> findAll() {
-        return placeRepository
-                .findAll()
-                .stream()
-                .map(place -> new PlaceResponseDto(
-                        place.getName(),
-                        place.getImageUrl(),
-                        place.getRating(),
-                        place.getTime(),
-                        place.getPhoneNumber(),
-                        place.getCity(),
-                        place.getCategory(),
-                        place.getWebsite(),
-                        place.getAddress()
-                )).toList();
-    }
-
     //수정
     @Transactional
     public String update(Long id, UpdateRequestDto request) {
@@ -69,5 +51,50 @@ public class PlaceService {
                 request.website()
         );
         return "수정 완료되었습니다.";
+    }
+
+    //목록 조회
+    public List<PlaceResponseDto> findAll() {
+        return placeRepository
+                .findAll()
+                .stream()
+                .map(place -> new PlaceResponseDto(
+                        place.getName(),
+                        place.getImageUrl(),
+                        place.getRating(),
+                        place.getTime(),
+                        place.getPhoneNumber(),
+                        place.getCity(),
+                        place.getCategory(),
+                        place.getWebsite(),
+                        place.getAddress()
+                )).toList();
+    }
+
+    //상세 조회
+    public PlaceDetailResponseDto findById(Long placeId) {
+        Place place = placeRepository.findById(placeId).orElse(null);
+
+        if (place == null){
+            throw new NoSuchElementException("장소를 찾을 수 없습니다.");
+        }
+
+        return new PlaceDetailResponseDto(
+                place.getName(),
+                place.getImageUrl(),
+                place.getRating(),
+                place.getAddress(),
+                place.getTime(),
+                place.getDescription(),
+                place.getPhoneNumber(),
+                place.getCity(),
+                place.getCategory(),
+                place.getWebsite()
+        );
+    }
+
+    //삭제
+    public void deleteById(Long placeId) {
+        placeRepository.deleteById(placeId);
     }
 }
