@@ -1,8 +1,11 @@
 package tours.tourism.place;
 
 import jakarta.persistence.*;
+import tours.tourism.review.Review;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Place {
@@ -17,6 +20,7 @@ public class Place {
 
     private String address;
 
+    @Column(name = "times")
     private String time;
 
     private String description;
@@ -32,6 +36,9 @@ public class Place {
     private String website;
 
     private double rating;
+
+    @OneToMany(mappedBy = "place", cascade = CascadeType.PERSIST)
+    List<Review> review = new ArrayList<>();
 
     public Place() {
     }
