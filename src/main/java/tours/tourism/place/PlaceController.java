@@ -22,14 +22,14 @@ public class PlaceController {
 
     //목록 조회
     @GetMapping("/places")
-    List<PlaceResponseDto> findAll(){
-        return placeService.findAll();
+    public List<PlaceResponseDto> findAll(@RequestParam(required = false)String sort){
+        return placeService.findAll(sort);
     }
 
     //수정
     @PutMapping("/place/{placeId}")
-    public Place update(@PathVariable Long id , @RequestBody UpdateRequestDto request){
-       Place place= placeService.update(id,request);
+    public Place update(@PathVariable Long placeId , @RequestBody UpdateRequestDto request){
+       Place place= placeService.update(placeId,request);
        return place;
     }
 
@@ -44,6 +44,10 @@ public class PlaceController {
     public PlaceDetailResponseDto findById(@PathVariable Long placeId){
          PlaceDetailResponseDto dto = placeService.findById(placeId);
          return dto;
+    }
+    @PutMapping("/deleteRecover/{placeId}")
+    public void deleteRecover(@PathVariable Long placeId){
+        placeService.deleteRecover(placeId);
     }
 
 

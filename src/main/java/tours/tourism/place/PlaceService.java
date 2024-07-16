@@ -1,10 +1,11 @@
 package tours.tourism.place;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Stream;
+import java.util.Objects;
 
 @Service
 public class PlaceService {
@@ -30,9 +31,16 @@ public class PlaceService {
     }
 
     //목록 조회
-    public List<PlaceResponseDto> findAll() {
-        return placeRepository
-                .findAll()
+    @Transactional
+    public List<PlaceResponseDto> findAll(String sort) {
+        List<Place> places;
+        if(Objects.equals(sort, "name")){//이름순 정렬
+            places = placeRepository.findAllByDeletedFalseOrderByNameAsc();
+
+        }else{//디폴트로 rating 정렬
+            places = placeRepository.findAllByDeletedFalseOrderByRatingDesc();
+        }
+        return places
                 .stream()
                 .map(place -> new PlaceResponseDto(
                         place.getName(),
@@ -94,4 +102,12 @@ public class PlaceService {
         );
     }
 
+    @Transactional
+    public void deleteRecover(Long placeId) {
+        Place place = placeRepository.findById(placeId).orElse(null);
+        if (place ==null){
+            throw new NoSuchElementException("장소를 찾을 수 없습니다.");
+        }
+        place.deleteRecover();
+    }
 }
