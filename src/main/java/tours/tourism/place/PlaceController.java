@@ -28,8 +28,10 @@ public class PlaceController {
 
     //목록 조회
     @GetMapping("/places")
-    public List<PlaceResponseDto> findAll(){
-        return placeService.findAll();
+    public List<PlaceResponseDto> findAll(@RequestParam(required = false)City city,
+                                          @RequestParam(required = false)Category category,
+                                          @RequestParam(required = false)String sort){
+        return placeService.findAll(city, category, sort);
     }
 
     //상세 조회

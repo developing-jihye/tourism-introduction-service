@@ -10,9 +10,11 @@ import java.util.NoSuchElementException;
 public class PlaceService {
 
     private final PlaceRepository placeRepository;
+    private final PlaceMapper placeMapper;
 
-    public PlaceService(PlaceRepository placeRepository) {
+    public PlaceService(PlaceRepository placeRepository, PlaceMapper placeMapper) {
         this.placeRepository = placeRepository;
+        this.placeMapper = placeMapper;
     }
 
     //등록
@@ -54,21 +56,8 @@ public class PlaceService {
     }
 
     //목록 조회
-    public List<PlaceResponseDto> findAll() {
-        return placeRepository
-                .findAll()
-                .stream()
-                .map(place -> new PlaceResponseDto(
-                        place.getName(),
-                        place.getImageUrl(),
-                        place.getRating(),
-                        place.getTime(),
-                        place.getPhoneNumber(),
-                        place.getCity(),
-                        place.getCategory(),
-                        place.getWebsite(),
-                        place.getAddress()
-                )).toList();
+    public List<PlaceResponseDto> findAll(City city,Category category,String sort) {
+        return placeMapper.findAll(city,category,sort);
     }
 
     //상세 조회
@@ -94,6 +83,7 @@ public class PlaceService {
     }
 
     //삭제
+    @Transactional
     public String deleteById(Long placeId) {
         Place place = placeRepository.findById(placeId)
                 .orElseThrow(()-> new NoSuchElementException("잘못된 접근입니다."));
