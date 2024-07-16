@@ -1,7 +1,7 @@
 package tours.tourism.review;
 
 public record CreateReviewResponseDto(
-        double rating,
+        Double rating,
         String comment,
         String placeName
 ) {
