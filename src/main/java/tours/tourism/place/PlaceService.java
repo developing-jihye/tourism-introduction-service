@@ -27,7 +27,26 @@ public class PlaceService {
                         request.website())
                 );
     }
-
+    //장소 하나 조회
+    public PlaceDetailResponseDTO findOne(Long placeId) {
+        Place place = placeRepository.findById(placeId).orElse(null);
+        if(place == null){
+            throw new NoSuchElementException("장소를 찾을 수 없습니다. 장소 ID : "+ placeId);
+        }
+        return new PlaceDetailResponseDTO(
+                place.getName(),
+                place.getImageUrl(),
+                place.getRating(),
+                place.getAddress(),
+                place.getTime(),
+                place.getDescription(),
+                place.getPhoneNumber(),
+                place.getCity(),
+                place.getCategory(),
+                place.getWebsite(),
+                null//place.getReview
+        );
+    }
     //목록 조회
     public List<PlaceResponseDto> findAll() {
         return placeRepository
@@ -64,4 +83,6 @@ public class PlaceService {
                 request.website()
         );
     }
+
+
 }
