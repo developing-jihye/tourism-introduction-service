@@ -46,11 +46,15 @@ public class ReviewService {
     // 리뷰 수정
     public UpdateResponseDto updateReview(Long reviewId, UpdateRequestDto request) {
 
+        if (reviewId == null) {
+            throw new NoSuchElementException("리뷰 ID가 존재하지 않습니다.");
+        }
+
         Review review = reviewRepository.findById(reviewId)
                 .orElse(null);
 
         if (review == null) {
-            throw new NoSuchElementException("해당 리뷰가 존재하지 않습니다. 리뷰 ID" + reviewId);
+            throw new NoSuchElementException("리뷰가 존재하지 않습니다.");
         }
 
         review.reviewUpdate(
