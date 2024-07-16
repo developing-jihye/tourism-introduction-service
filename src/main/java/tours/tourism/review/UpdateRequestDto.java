@@ -1,7 +1,10 @@
 package tours.tourism.review;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+
 public record UpdateRequestDto(
-        Double rating,
-        String comment
+        @NotNull @PositiveOrZero Double rating,
+        @NotNull String comment
 ) {
 }
