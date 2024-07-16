@@ -16,8 +16,9 @@ public class PlaceController {
 
     //등록
     @PostMapping("/place")
-    public void create(@Valid @RequestBody CreateRequestDto request){
+    public String create(@Valid @RequestBody CreateRequestDto request){
         placeService.create(request);
+        return "등록되었습니다";
     }
 
     //목록 조회
@@ -28,26 +29,29 @@ public class PlaceController {
 
     //수정
     @PutMapping("/place/{placeId}")
-    public Place update(@PathVariable Long placeId , @RequestBody UpdateRequestDto request){
-       Place place= placeService.update(placeId,request);
-       return place;
+    public String update(@PathVariable Long placeId , @RequestBody UpdateRequestDto request){
+       placeService.update(placeId,request);
+        return "수정되었습니다.";
     }
 
-    //삭제
-    @DeleteMapping("/place/{placeId}")
-    public void delete(@PathVariable Long placeId){
-        placeService.deleteById(placeId);
-    }
+//    //삭제(hard delete)
+//    @DeleteMapping("/place/{placeId}")
+//    public String delete(@PathVariable Long placeId){
+//        placeService.deleteById(placeId);
+//        return "삭제되었습니다.";
+//    }
 
     //상세조회
     @GetMapping("place/{placeId}")
     public PlaceDetailResponseDto findById(@PathVariable Long placeId){
-         PlaceDetailResponseDto dto = placeService.findById(placeId);
-         return dto;
+          return placeService.findById(placeId);
+
     }
-    @PutMapping("/deleteRecover/{placeId}")
-    public void deleteRecover(@PathVariable Long placeId){
+    //soft delete
+    @DeleteMapping("/place/{placeId}")
+    public String deleteRecover(@PathVariable Long placeId){
         placeService.deleteRecover(placeId);
+        return "삭제(복구)되었습니다";
     }
 
 

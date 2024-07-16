@@ -56,7 +56,8 @@ public class PlaceService {
     }
 
     //수정
-    public Place update(Long id, UpdateRequestDto request) {
+    @Transactional
+    public void update(Long id, UpdateRequestDto request) {
         Place place = placeRepository.findById(id).orElse(null);
         if (place == null) {
             throw new NoSuchElementException("장소를 찾을 수 없습니다.");
@@ -72,13 +73,13 @@ public class PlaceService {
                 request.category(),
                 request.website()
         );
-        return  place;
+
     }
 
-    //삭제
-    public void deleteById(Long placeId) {
-        placeRepository.deleteById(placeId);
-    }
+//    //삭제(hard delete)
+//    public void deleteById(Long placeId) {
+//        placeRepository.deleteById(placeId);
+//    }
 
     //상세 조회
     public PlaceDetailResponseDto findById(Long placeId) {

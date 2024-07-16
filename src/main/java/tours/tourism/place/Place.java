@@ -34,7 +34,7 @@ public class Place {
 
     private String website;
 
-    private Double rating;
+    private double rating;
 
     @ColumnDefault(value = "false")
     private boolean deleted;
