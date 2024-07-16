@@ -1,6 +1,6 @@
 package tours.tourism.review;
 
-public record createReviewRequestDto(
+public record CreateReviewRequestDto(
         double rating,
         String comment,
         Long placeId
