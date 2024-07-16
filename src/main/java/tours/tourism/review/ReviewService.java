@@ -14,11 +14,9 @@ import java.util.OptionalDouble;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
-    private final PlaceRepository placeRepository;
 
-    public ReviewService(ReviewRepository reviewRepository, PlaceRepository placeRepository) {
+    public ReviewService(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
-        this.placeRepository = placeRepository;
     }
 
     // 리뷰 등록
@@ -67,29 +65,24 @@ public class ReviewService {
         );
     }
 
-    @Transactional
     // 리뷰 삭제
+    @Transactional
     public String deleteReview(Long reviewId) {
 
         if (reviewId == null) {
             throw new NoSuchElementException("해당하는 리뷰가 존재하지 않습니다");
         }
 
-        reviewRepository.deleteById(reviewId);
+        Review review = reviewRepository.findById(reviewId)
+                .orElse(null);
+
+        if (review == null) {
+            throw new NoSuchElementException("해당 리뷰가 없습니다");
+        }
+
+        review.deleteTime();
 
         return "리뷰가 삭제되었습니다";
     }
 
-    public double calculateAverageRating(Long placeId) {
-
-        List<Review> reviews = reviewRepository.findByPlaceId(placeId);
-
-        OptionalDouble average = reviews.stream()
-                .mapToDouble(Review::getRating)
-                .average();
-
-        double arr =average.isPresent() ? average.getAsDouble() : 0.0;
-        return Math.round(arr*1000) / 1000.0;
-
-    }
 }
