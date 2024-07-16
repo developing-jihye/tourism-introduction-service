@@ -1,7 +1,7 @@
 package tours.tourism.place;
 
 import jakarta.validation.constraints.NotNull;
-import tours.tourism.review.Review;
+//import tours.tourism.review.Review;
 
 import java.util.List;
 
@@ -27,8 +27,8 @@ public record PlaceDetailResponseDTO(
         @NotNull
         Category category,
 
-        String website,
+        String website
 
-        List<Review> reviews
+//        List<Review> reviews
 ){
 }
