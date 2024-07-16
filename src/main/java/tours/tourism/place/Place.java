@@ -3,6 +3,7 @@ package tours.tourism.place;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -33,6 +34,8 @@ public class Place {
     private String website;
 
     private double rating;
+
+    private LocalDateTime deletedDate = null;
 
     public Place() {
     }
@@ -112,5 +115,8 @@ public class Place {
         this.category = category;
         this.website = website;
 
+    }
+    public void delete(){
+        this.deletedDate = LocalDateTime.now();
     }
 }
