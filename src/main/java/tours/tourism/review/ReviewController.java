@@ -36,10 +36,6 @@ public class ReviewController {
         return reviewService.deleteReview(reviewId);
     }
 
-    // 리뷰 평점
-    @GetMapping("/{placeId}/average-rating")
-    public double getAverageRating(@PathVariable Long placeId) {
-        return reviewService.calculateAverageRating(placeId);
-    }
+
 
 }
