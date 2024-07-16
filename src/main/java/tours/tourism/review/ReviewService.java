@@ -63,4 +63,9 @@ public class ReviewService {
     }
 
     // 리뷰 삭제
+    public void softDelete(Long reviewId) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new NoSuchElementException("해당 리뷰가 없습니다."));
+        review.softDelete();
+    }
 }

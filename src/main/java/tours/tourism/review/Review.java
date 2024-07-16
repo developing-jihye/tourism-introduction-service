@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import tours.tourism.place.Place;
 import tours.tourism.user.User;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Review {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +21,12 @@ public class Review {
     @ManyToOne
     private User user;
 
+    private LocalDateTime deletedAt = null;
+
+    // constructors
+    public Review() {
+    }
+
     public Review(Double rating, String comment, Place place, User user) {
         this.rating = rating;
         this.comment = comment;
@@ -26,6 +34,7 @@ public class Review {
         this.user = user;
     }
 
+    // getters
     public Long getId() {
         return id;
     }
@@ -44,5 +53,10 @@ public class Review {
 
     public User getUser() {
         return user;
+    }
+
+    // soft delete
+    public void softDelete()  {
+        this.deletedAt = LocalDateTime.now();
     }
 }

@@ -24,5 +24,9 @@ public class ReviewRestController {
     }
 
     // 리뷰 삭제
-
+    @DeleteMapping("/review/{reviewId}")
+    public String softDeleteReview(@PathVariable Long reviewId) {
+        reviewService.softDelete(reviewId);
+        return "리뷰 삭제가 완료되었습니다.";
+    }
 }
