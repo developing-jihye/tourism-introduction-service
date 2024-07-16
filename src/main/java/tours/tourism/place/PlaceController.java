@@ -28,20 +28,20 @@ public class PlaceController {
 
     //목록 조회
     @GetMapping("/places")
-    List<PlaceResponseDto> findAll(){
+    public List<PlaceResponseDto> findAll(){
         return placeService.findAll();
     }
 
     //상세 조회
     @GetMapping("/places/{placeId}")
-    PlaceDetailResponseDto findById(@PathVariable Long placeId){
+    public PlaceDetailResponseDto findById(@PathVariable Long placeId){
         return placeService.findById(placeId);
     }
 
     //삭제
     @DeleteMapping("/place/{placeId}")
-    void delete(@PathVariable Long placeId){
-        placeService.deleteById(placeId);
+    public String delete(@PathVariable Long placeId){
+        return placeService.deleteById(placeId);
     }
 
 

@@ -94,7 +94,10 @@ public class PlaceService {
     }
 
     //삭제
-    public void deleteById(Long placeId) {
-        placeRepository.deleteById(placeId);
+    public String deleteById(Long placeId) {
+        Place place = placeRepository.findById(placeId)
+                .orElseThrow(()-> new NoSuchElementException("잘못된 접근입니다."));
+        place.delete();
+        return "삭제 되었습니다.";
     }
 }

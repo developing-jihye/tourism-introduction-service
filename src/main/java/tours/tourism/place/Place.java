@@ -1,9 +1,7 @@
 package tours.tourism.place;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-
-import java.time.LocalDateTime;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 public class Place {
@@ -33,8 +31,10 @@ public class Place {
     private String website;
 
     private double rating;
+    @ColumnDefault(value = "false")
+    private boolean deleted = false;
 
-    public Place() {
+    protected Place() {
     }
 
     public Long getId() {
@@ -113,4 +113,9 @@ public class Place {
         this.website = website;
 
     }
+
+    public void delete(){
+        this.deleted = true;
+    }
+
 }
