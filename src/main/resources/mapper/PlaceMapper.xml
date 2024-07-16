@@ -4,8 +4,14 @@
 
 <mapper namespace="tours.tourism.place.PlaceMapper">
     <select id="findAll" resultType="tours.tourism.place.PlaceResponseDto">
-
-
+        SELECT review.id,
+                review.comment,
+                review.user_id,
+                review.place_id,
+                review.rating
+        FROM place
+        JOIN review
+        ON place_rating = review.rating
 
         <where>
          <if test = "sort == 'RATING'">
