@@ -1,8 +1,6 @@
 package tours.tourism.review;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ReviewRestController {
@@ -15,11 +13,15 @@ public class ReviewRestController {
 
     // 리뷰 등록
     @PostMapping("/review")
-    public createReviewResponseDto createReview(@RequestBody createReviewRequestDto createRequestDto) {
+    public CreateReviewResponseDto createReview(@RequestBody CreateReviewRequestDto createRequestDto) {
         return reviewService.create(createRequestDto);
     }
 
     // 리뷰 수정
+    @PutMapping("/review/{reviewId}")
+    public CreateReviewResponseDto updateReview(@PathVariable Long reviewId, @RequestBody UpdateReviewRequestDto body) {
+        return reviewService.update(reviewId, body);
+    }
 
     // 리뷰 삭제
 

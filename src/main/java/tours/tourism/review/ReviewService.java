@@ -6,6 +6,8 @@ import tours.tourism.place.PlaceRepository;
 import tours.tourism.user.User;
 import tours.tourism.user.UserRepository;
 
+import java.util.NoSuchElementException;
+
 @Service
 public class ReviewService {
 
@@ -20,7 +22,7 @@ public class ReviewService {
     }
 
     // 리뷰 등록
-    public createReviewResponseDto create(createReviewRequestDto createRequestDto) {
+    public CreateReviewResponseDto create(CreateReviewRequestDto createRequestDto) {
 
         Place place = placeRepository.findById(createRequestDto.placeId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 장소가 존재하지 않습니다."));
@@ -40,7 +42,7 @@ public class ReviewService {
 
         reviewRepository.save(review);
 
-        return new createReviewResponseDto(
+        return new CreateReviewResponseDto(
                 review.getRating(),
                 review.getComment(),
                 review.getPlace().getName()
@@ -48,6 +50,17 @@ public class ReviewService {
     }
 
     // 리뷰 수정
+    public CreateReviewResponseDto update(Long reviewId, UpdateReviewRequestDto body) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new NoSuchElementException("해당 리뷰가 없습니다."));
+        reviewRepository.save(review);
+
+        return new CreateReviewResponseDto(
+                review.getRating(),
+                review.getComment(),
+                review.getPlace().getName()
+        );
+    }
 
     // 리뷰 삭제
 }
