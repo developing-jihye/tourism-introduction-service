@@ -20,6 +20,12 @@ public class PlaceController {
         placeService.create(request);
     }
 
+    //장소 조회
+    @GetMapping("/place/{placeId}")
+    public PlaceDetailResponseDTO findOne(@PathVariable Long id){
+        return placeService.findOne(id);
+    }
+
     //목록 조회
     @GetMapping("/places")
     List<PlaceResponseDto> findAll(){
