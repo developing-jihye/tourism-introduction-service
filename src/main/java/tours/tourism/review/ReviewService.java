@@ -1,6 +1,7 @@
 package tours.tourism.review;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tours.tourism.place.Place;
 import tours.tourism.place.PlaceRepository;
 import tours.tourism.user.User;
@@ -50,6 +51,7 @@ public class ReviewService {
     }
 
     // 리뷰 수정
+    @Transactional
     public CreateReviewResponseDto update(Long reviewId, UpdateReviewRequestDto body) {
         Review review = reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new NoSuchElementException("해당 리뷰가 없습니다."));
@@ -63,6 +65,7 @@ public class ReviewService {
     }
 
     // 리뷰 삭제
+    @Transactional
     public void softDelete(Long reviewId) {
         Review review = reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new NoSuchElementException("해당 리뷰가 없습니다."));
