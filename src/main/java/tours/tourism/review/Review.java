@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import tours.tourism.place.Place;
 import tours.tourism.user.User;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Review {
 
@@ -20,6 +22,8 @@ public class Review {
 
     @ManyToOne
     private Place place;
+
+    private LocalDateTime deleteTime = null;
 
     public Review() {
     }
@@ -55,5 +59,10 @@ public class Review {
     public void reviewUpdate(Double rating, String comment) {
         this.rating = rating;
         this.comment = comment;
+    }
+
+    // 리뷰 삭제 했을 때 시간 나오게 하는 함수
+    public void deleteTime() {
+        this.deleteTime = LocalDateTime.now();
     }
 }
