@@ -28,11 +28,10 @@ public class Review {
     public Review() {
     }
 
-    public Review(Double rating, String comment, User user, Place place) {
+    public Review(Double rating, String comment, User user) {
         this.rating = rating;
         this.comment = comment;
         this.user = user;
-        this.place = place;
     }
 
     public Long getId() {
