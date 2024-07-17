@@ -9,10 +9,10 @@ import java.util.OptionalDouble;
 @Component
 public class RatingCalculator {
 
-    public double calculateAverageRating(List<Review> reviews) {
+    public double calculateAverageRating(List<Double> ratings) {
 
-        OptionalDouble average = reviews.stream()
-                .mapToDouble(Review::getRating)
+        OptionalDouble average = ratings.stream()
+                .mapToDouble(Double::doubleValue)
                 .average();
 
         double arr = average.isPresent() ? average.getAsDouble() : 0.0;
