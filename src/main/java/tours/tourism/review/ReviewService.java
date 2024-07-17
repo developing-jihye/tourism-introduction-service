@@ -22,15 +22,14 @@ public class ReviewService {
     // 리뷰 등록
     public ReviewResponseDTO create(CreateRequestDto request) {
 
-        Place place = new Place();
+
 
         User user = new User();
 
         Review review = new Review(
                 request.rating(),
                 request.comment(),
-                user,
-                place
+                user
         );
 
         Review reviewSave = reviewRepository.save(review);

@@ -1,5 +1,7 @@
 package tours.tourism.place;
 
+import java.util.List;
+
 public record PlaceDetailResponseDto(
         String name,
         String imageUrl,
