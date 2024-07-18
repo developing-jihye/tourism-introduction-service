@@ -1,6 +1,6 @@
 package tours.tourism.review;
 
-public record ReviewResponseDTO(
+public record ReviewResponseDto(
         Double rating,
         String comment,
         String placeName

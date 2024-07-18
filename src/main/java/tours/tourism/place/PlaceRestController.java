@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class PlaceController {
+public class PlaceRestController {
 
     private final PlaceService placeService;
 
-    public PlaceController(PlaceService placeService) {
+    public PlaceRestController(PlaceService placeService) {
         this.placeService = placeService;
     }
 
