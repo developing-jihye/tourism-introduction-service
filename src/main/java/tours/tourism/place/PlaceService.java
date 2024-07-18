@@ -99,7 +99,8 @@ public class PlaceService {
                 place.getPhoneNumber(),
                 place.getCity(),
                 place.getCategory(),
-                place.getWebsite()
+                place.getWebsite(),
+                place.getReviews()
         );
     }
 
