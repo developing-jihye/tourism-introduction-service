@@ -15,7 +15,7 @@ public class ReviewController {
 
     // 리뷰 등록
     @PostMapping
-    public ReviewResponseDTO create(@Valid @RequestBody CreateRequestDto request) {
+    public ReviewResponseDto create(@Valid @RequestBody CreateRequestDto request) {
 
         return reviewService.create(request);
     }
