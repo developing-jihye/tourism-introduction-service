@@ -23,15 +23,16 @@ public class Review {
     @ManyToOne
     private Place place;
 
-    private LocalDateTime deleteTime = null;
+    private LocalDateTime deletedDateTime = null;
 
     public Review() {
     }
 
-    public Review(Double rating, String comment, User user) {
+    public Review(Double rating, String comment, User user, Place place) {
         this.rating = rating;
         this.comment = comment;
         this.user = user;
+        this.place = place;
     }
 
     public Long getId() {
@@ -61,7 +62,7 @@ public class Review {
     }
 
     // 리뷰 삭제 했을 때 시간 나오게 하는 함수
-    public void deleteTime() {
-        this.deleteTime = LocalDateTime.now();
+    public void deletedDateTime() {
+        this.deletedDateTime = LocalDateTime.now();
     }
 }

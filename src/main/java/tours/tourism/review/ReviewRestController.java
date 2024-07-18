@@ -5,17 +5,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/review")
-public class ReviewController {
+public class ReviewRestController {
 
     private final ReviewService reviewService;
 
-    public ReviewController(ReviewService reviewService) {
+    public ReviewRestController(ReviewService reviewService) {
         this.reviewService = reviewService;
     }
 
     // 리뷰 등록
     @PostMapping
-    public ReviewResponseDTO create(@Valid @RequestBody CreateRequestDto request) {
+    public ReviewResponseDto create(@Valid @RequestBody CreateRequestDto request) {
 
         return reviewService.create(request);
     }

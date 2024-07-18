@@ -5,36 +5,46 @@ import org.springframework.stereotype.Service;
 import tours.tourism.place.Place;
 import tours.tourism.place.PlaceRepository;
 import tours.tourism.user.User;
+import tours.tourism.user.UserRepository;
 
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.OptionalDouble;
 
 @Service
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
+    private final PlaceRepository placeRepository;
+    private final UserRepository userRepository;
 
-    public ReviewService(ReviewRepository reviewRepository) {
+    public ReviewService(ReviewRepository reviewRepository, PlaceRepository placeRepository, UserRepository userRepository) {
         this.reviewRepository = reviewRepository;
+        this.placeRepository = placeRepository;
+        this.userRepository = userRepository;
     }
 
     // 리뷰 등록
-    public ReviewResponseDTO create(CreateRequestDto request) {
+    public ReviewResponseDto create(CreateRequestDto request) {
 
+        Place place = placeRepository.findById(request.placeId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 장소가 존재하지 않습니다."));
 
+        // 임시로 만든 빈 user ( 꼭 빼야함!!! )
+        User user = new User("홍길동", "123", "abc@gmail.com");
 
-        User user = new User();
+        // 임시로 DB에 저장
+        user = userRepository.save(user);
 
         Review review = new Review(
                 request.rating(),
                 request.comment(),
-                user
+                user,
+                place
         );
 
         Review reviewSave = reviewRepository.save(review);
 
-        return new ReviewResponseDTO(
+
+        return new ReviewResponseDto(
                 reviewSave.getRating(),
                 reviewSave.getComment(),
                 reviewSave.getPlace().getName()
@@ -83,7 +93,7 @@ public class ReviewService {
             throw new NoSuchElementException("해당 리뷰가 없습니다");
         }
 
-        review.deleteTime();
+        review.deletedDateTime();
 
         return "리뷰가 삭제되었습니다";
     }
