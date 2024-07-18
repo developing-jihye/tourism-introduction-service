@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/review")
-public class ReviewController {
+public class ReviewRestController {
 
     private final ReviewService reviewService;
 
-    public ReviewController(ReviewService reviewService) {
+    public ReviewRestController(ReviewService reviewService) {
         this.reviewService = reviewService;
     }
 
