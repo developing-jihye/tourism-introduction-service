@@ -32,7 +32,7 @@ public class UserService {
             throw new IllegalArgumentException("이메일 또는 비밀번호가 올바르지 않습니다");
         }
 
-        if (user.authenticate(SecurityUtils.sha256Encrypt(request.password()))) {
+        if (!user.authenticate(SecurityUtils.sha256Encrypt(request.password()))) {
             throw  new IllegalArgumentException("이메일 또는 비밀번호가 올바르지 않습니다");
         }
     }
