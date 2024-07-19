@@ -15,11 +15,13 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final PlaceRepository placeRepository;
     private final UserRepository userRepository;
+    private final RatingCalculator ratingCalculator;
 
-    public ReviewService(ReviewRepository reviewRepository, PlaceRepository placeRepository, UserRepository userRepository) {
+    public ReviewService(ReviewRepository reviewRepository, PlaceRepository placeRepository, UserRepository userRepository, RatingCalculator ratingCalculator) {
         this.reviewRepository = reviewRepository;
         this.placeRepository = placeRepository;
         this.userRepository = userRepository;
+        this.ratingCalculator = ratingCalculator;
     }
 
     // 리뷰 등록
@@ -43,6 +45,11 @@ public class ReviewService {
 
         Review reviewSave = reviewRepository.save(review);
 
+        double newRating = ratingCalculator.addRating(place.getRating(), place.getReviewCount(), reviewSave.getRating());
+        place.setRating(newRating);
+        place.incrementReviewCount();
+        place.addReview(reviewSave);
+        placeRepository.save(place);
 
         return new ReviewResponseDto(
                 reviewSave.getRating(),
@@ -66,10 +73,17 @@ public class ReviewService {
             throw new NoSuchElementException("리뷰가 존재하지 않습니다.");
         }
 
+        double oldRating = review.getRating();
+
         review.reviewUpdate(
                 request.rating(),
                 request.comment()
         );
+
+        Place place = review.getPlace();
+        double newRating = ratingCalculator.updateRating(place.getRating(), place.getReviewCount(), oldRating, review.getRating());
+        place.setRating(newRating);
+        placeRepository.save(place);
 
         return new UpdateResponseDto(
                 review.getRating(),
@@ -92,6 +106,13 @@ public class ReviewService {
         if (review == null) {
             throw new NoSuchElementException("해당 리뷰가 없습니다");
         }
+
+        Place place = review.getPlace();
+        double newRating = ratingCalculator.removeRating(place.getRating(), place.getReviewCount(), review.getRating());
+        place.setRating(newRating);
+        place.decrementReviewCount();
+        place.removeReview(review);
+        placeRepository.save(place);
 
         review.deletedDateTime();
 
