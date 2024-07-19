@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import tours.tourism.JwtProvider;
+import tours.tourism.LoginUser;
 
 @RestController
 public class UserController {
@@ -24,11 +25,14 @@ public class UserController {
 
     // 로그인
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequestDto request) {
-        return jwtProvider.createToken(request.email());
+    public String login(@LoginUser User user, @RequestBody LoginRequestDto request) {
+        return jwtProvider.createToken(user.getEmail());
     }
 
-    // 사용자 정보 수정
-//    @PatchMapping("/join")
+    //비밀번호 변경
+    @PatchMapping("/password")
+    public String changePassword(@LoginUser User user,@RequestBody ChangePasswordRequestDto request){
+        return userService.changePassword(user,request);
+    }
 
 }
