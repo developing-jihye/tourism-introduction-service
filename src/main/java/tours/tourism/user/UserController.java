@@ -10,11 +10,9 @@ import tours.tourism.LoginUser;
 public class UserController {
 
     private final UserService userService;
-    private final JwtProvider jwtProvider;
 
-    public UserController(UserService userService, JwtProvider jwtProvider) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.jwtProvider = jwtProvider;
     }
 
     // 회원 가입
@@ -26,7 +24,7 @@ public class UserController {
     // 로그인
     @PostMapping("/login")
     public String login(@LoginUser User user, @RequestBody LoginRequestDto request) {
-        return jwtProvider.createToken(user.getEmail());
+        return userService.login(user, request);
     }
 
     //비밀번호 변경

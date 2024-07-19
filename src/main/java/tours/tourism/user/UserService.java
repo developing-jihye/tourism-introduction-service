@@ -1,15 +1,18 @@
 package tours.tourism.user;
 
 import org.springframework.stereotype.Service;
+import tours.tourism.JwtProvider;
 import tours.tourism.SecurityUtils;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
+    public final JwtProvider jwtProvider;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, JwtProvider jwtProvider) {
         this.userRepository = userRepository;
+        this.jwtProvider = jwtProvider;
     }
 
     // 회원 가입
@@ -23,15 +26,12 @@ public class UserService {
     }
 
     // 로그인
-    public void login(User user,LoginRequestDto request) {
-
-        if (user == null) {
-            throw new IllegalArgumentException("이메일 또는 비밀번호가 올바르지 않습니다");
-        }
+    public String login(User user,LoginRequestDto request) {
 
         if (!user.authenticate(SecurityUtils.sha256Encrypt(request.password()))) {
             throw  new IllegalArgumentException("이메일 또는 비밀번호가 올바르지 않습니다");
         }
+        return jwtProvider.createToken(user.getEmail());
     }
 
     //비밀번호 변경
