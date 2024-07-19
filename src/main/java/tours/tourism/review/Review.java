@@ -65,4 +65,8 @@ public class Review {
     public void deletedDateTime() {
         this.deletedDateTime = LocalDateTime.now();
     }
+
+    public void setPlace(Place place) {
+        this.place = place;
+    }
 }
