@@ -35,6 +35,10 @@ public class Review {
         this.place = place;
     }
 
+    public void setPlace(Place place) {
+        this.place = place;
+    }
+
     public Long getId() {
         return id;
     }

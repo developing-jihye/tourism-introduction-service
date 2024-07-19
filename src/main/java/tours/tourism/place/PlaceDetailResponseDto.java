@@ -1,5 +1,7 @@
 package tours.tourism.place;
 
+import tours.tourism.review.Review;
+
 import java.util.List;
 
 public record PlaceDetailResponseDto(
@@ -12,7 +14,7 @@ public record PlaceDetailResponseDto(
         String phoneNumber,
         City city,
         Category category,
-        String website
-//        List<Review> review
+        String website,
+        List<Review> reviews
 ) {
 }
