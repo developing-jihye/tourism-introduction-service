@@ -23,14 +23,20 @@ public class UserController {
 
     // 로그인
     @PostMapping("/login")
-    public String login(@LoginUser User user, @RequestBody LoginRequestDto request) {
-        return userService.login(user, request);
+    public void login(@LoginUser User user, @RequestBody LoginRequestDto request) {
+        userService.login(user, request);
     }
 
     //비밀번호 변경
     @PatchMapping("/password")
-    public String changePassword(@LoginUser User user,@RequestBody ChangePasswordRequestDto request){
-        return userService.changePassword(user,request);
+    public void changePassword(@LoginUser User user,@RequestBody ChangePasswordRequestDto request){
+        userService.changePassword(user,request);
+    }
+
+    //회원 탈퇴
+    @DeleteMapping("/cancel")
+    public void cancelUser(@LoginUser User user,@RequestBody CancelRequestDto request){
+        userService.cancelUser(user,request);
     }
 
 }

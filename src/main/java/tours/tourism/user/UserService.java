@@ -45,4 +45,12 @@ public class UserService {
         return request.changePassword();
 
     }
+
+    //회원 탈퇴
+    public void cancelUser(User user, CancelRequestDto request) {
+        if(!user.authenticate(request.password())){
+            throw new IllegalArgumentException("비밀번호를 다시 입력해주세요.");
+        }
+        userRepository.deleteByEmail(user.getEmail());
+    }
 }
