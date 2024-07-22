@@ -1,6 +1,7 @@
 package tours.tourism.user;
 
 import jakarta.persistence.*;
+import tours.tourism.SecurityUtils;
 
 @Entity
 @Table(name = "Users")
@@ -43,6 +44,7 @@ public class User {
 
     // 비밀번호 같은지 확인하는 함수
     public boolean authenticate(String password) {
-        return this.password.equals(password);
+        String hashedPassword = SecurityUtils.sha256Encrypt(password);
+        return this.password.equals(hashedPassword);
     }
 }

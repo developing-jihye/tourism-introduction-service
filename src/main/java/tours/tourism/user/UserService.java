@@ -26,12 +26,13 @@ public class UserService {
     }
 
     // 로그인
-    public String login(User user,LoginRequestDto request) {
+    public LoginResponse login(User user,LoginRequestDto request) {
 
-        if (!user.authenticate(SecurityUtils.sha256Encrypt(request.password()))) {
+        if (!user.authenticate(request.password())) {
             throw  new IllegalArgumentException("이메일 또는 비밀번호가 올바르지 않습니다");
         }
-        return jwtProvider.createToken(user.getEmail());
+        String token = jwtProvider.createToken(user.getEmail());
+        return new LoginResponse(token);
     }
 
     //비밀번호 변경

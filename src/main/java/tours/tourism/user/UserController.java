@@ -23,8 +23,8 @@ public class UserController {
 
     // 로그인
     @PostMapping("/login")
-    public void login(@LoginUser User user, @RequestBody LoginRequestDto request) {
-        userService.login(user, request);
+    public LoginResponse login(@LoginUser User user, @RequestBody LoginRequestDto request) {
+        return userService.login(user, request);
     }
 
     //비밀번호 변경
