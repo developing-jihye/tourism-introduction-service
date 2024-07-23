@@ -31,10 +31,11 @@ public class ReviewService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 장소가 존재하지 않습니다."));
 
         // 임시로 만든 빈 user ( 꼭 빼야함!!! )
-        User user = new User("홍길동", "123", "abc@gmail.com");
+        User user = userRepository.findById(request.userId())
+                .orElseThrow(() -> new NoSuchElementException("해당 유저는 없습니다"));
 
-        // 임시로 DB에 저장
-        user = userRepository.save(user);
+        // 임시로 DB에 저장 (나중에 확인)
+//        user = userRepository.save(user);
 
         Review review = new Review(
                 request.rating(),
