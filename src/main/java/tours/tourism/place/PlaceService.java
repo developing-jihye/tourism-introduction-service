@@ -83,7 +83,7 @@ public class PlaceService {
 
     //상세 조회
     public PlaceDetailResponseDto findById(Long placeId) {
-        Place place =placeRepository.findById(placeId).orElse(null);
+        Place place = placeRepository.findById(placeId).orElse(null);
 
         if (place ==null){
             throw new NoSuchElementException("장소를 찾을 수 없습니다.");
@@ -100,7 +100,12 @@ public class PlaceService {
                 place.getCity(),
                 place.getCategory(),
                 place.getWebsite(),
-                place.getReviews()
+                place.getReviews().stream().map(
+                        review -> new PlaceDetailResponseDto.Review(
+                                review.getRating(),
+                                review.getComment()
+                        )
+                ).toList()
         );
     }
 
