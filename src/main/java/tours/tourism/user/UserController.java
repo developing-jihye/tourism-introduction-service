@@ -24,8 +24,8 @@ public class UserController {
 
     // 로그인
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequestDto request) {
-        return jwtProvider.createToken(request.email());
+    public LoginResponseDto login(@Valid @RequestBody LoginRequestDto requestDto) {
+        return userService.authenticateAndGenerateToken(requestDto);
     }
 
     // 사용자 정보 수정
