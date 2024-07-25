@@ -2,6 +2,8 @@ package tours.tourism.place;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tours.tourism.user.User;
+import tours.tourism.user.UserRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -11,13 +13,19 @@ import java.util.Objects;
 public class PlaceService {
 
     private final PlaceRepository placeRepository;
+    private final UserRepository userRepository;
 
-    public PlaceService(PlaceRepository placeRepository) {
+    public PlaceService(PlaceRepository placeRepository, UserRepository userRepository) {
         this.placeRepository = placeRepository;
+        this.userRepository = userRepository;
     }
 
     //등록
-    public void create(CreateRequestDto request) {
+    public void create(String userEmail, CreateRequestDto request) {
+
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new IllegalArgumentException("잘못 입력했습니다"));
+
         placeRepository.save(new Place(request.name(),
                 request.imageUrl(),
                 request.address(),
@@ -34,11 +42,11 @@ public class PlaceService {
     @Transactional
     public List<PlaceResponseDto> findAll(String sort) {
         List<Place> places;
-        if(Objects.equals(sort, "name")){//이름순 정렬
-            places = placeRepository.findAllByDeletedFalseOrderByNameAsc();
+        if(Objects.equals(sort, "rating")){//이름순 정렬
 
-        }else{//디폴트로 rating 정렬
             places = placeRepository.findAllByDeletedFalseOrderByRatingDesc();
+        }else{//디폴트로 rating 정렬
+            places = placeRepository.findAllByDeletedFalseOrderByNameAsc();
         }
         return places
                 .stream()
@@ -57,7 +65,11 @@ public class PlaceService {
 
     //수정
     @Transactional
-    public void update(Long id, UpdateRequestDto request) {
+    public void update(String userEmail, Long id, UpdateRequestDto request) {
+
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new IllegalArgumentException("잘못 입력했습니다"));
+
         Place place = placeRepository.findById(id).orElse(null);
         if (place == null) {
             throw new NoSuchElementException("장소를 찾을 수 없습니다.");
@@ -110,7 +122,11 @@ public class PlaceService {
     }
 
     @Transactional
-    public void deleteRecover(Long placeId) {
+    public void deleteRecover(String userEmail, Long placeId) {
+
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new IllegalArgumentException("잘못 입력했습니다"));
+
         Place place = placeRepository.findById(placeId).orElse(null);
         if (place ==null){
             throw new NoSuchElementException("장소를 찾을 수 없습니다.");

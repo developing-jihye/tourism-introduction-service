@@ -2,6 +2,8 @@ package tours.tourism.place;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import tours.tourism.LoginUser;
+import tours.tourism.user.User;
 
 import java.util.List;
 
@@ -16,8 +18,8 @@ public class PlaceRestController {
 
     //등록
     @PostMapping("/place")
-    public String create(@Valid @RequestBody CreateRequestDto request){
-        placeService.create(request);
+    public String create(@LoginUser User user, @Valid @RequestBody CreateRequestDto request){
+        placeService.create(user.getEmail(), request);
         return "등록되었습니다";
     }
 
@@ -29,8 +31,8 @@ public class PlaceRestController {
 
     //수정
     @PutMapping("/place/{placeId}")
-    public String update(@PathVariable Long placeId , @RequestBody UpdateRequestDto request){
-       placeService.update(placeId,request);
+    public String update(@LoginUser User user, @PathVariable Long placeId , @RequestBody UpdateRequestDto request){
+       placeService.update(user.getEmail(),placeId,request);
         return "수정되었습니다.";
     }
 
@@ -49,8 +51,8 @@ public class PlaceRestController {
     }
     //soft delete
     @DeleteMapping("/place/{placeId}")
-    public String deleteRecover(@PathVariable Long placeId){
-        placeService.deleteRecover(placeId);
+    public String deleteRecover(@LoginUser User user, @PathVariable Long placeId){
+        placeService.deleteRecover(user.getEmail(), placeId);
         return "삭제(복구)되었습니다";
     }
 

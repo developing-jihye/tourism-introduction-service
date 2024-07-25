@@ -25,13 +25,13 @@ public class ReviewService {
     }
 
     // 리뷰 등록
-    public ReviewResponseDto create(CreateRequestDto request) {
+    public ReviewResponseDto create(String userEmail, CreateRequestDto request) {
 
         Place place = placeRepository.findById(request.placeId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 장소가 존재하지 않습니다."));
 
         // 임시로 만든 빈 user ( 꼭 빼야함!!! )
-        User user = userRepository.findById(request.userId())
+        User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new NoSuchElementException("해당 유저는 없습니다"));
 
         // 임시로 DB에 저장 (나중에 확인)
@@ -61,7 +61,10 @@ public class ReviewService {
 
     @Transactional
     // 리뷰 수정
-    public UpdateResponseDto updateReview(Long reviewId, UpdateRequestDto request) {
+    public UpdateResponseDto updateReview(String userEmail, Long reviewId, UpdateRequestDto request) {
+
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new IllegalArgumentException("잘못 입력했습니다"));
 
         if (reviewId == null) {
             throw new NoSuchElementException("리뷰 ID가 존재하지 않습니다.");
@@ -95,7 +98,10 @@ public class ReviewService {
 
     // 리뷰 삭제
     @Transactional
-    public String deleteReview(Long reviewId) {
+    public String deleteReview(String userEmail, Long reviewId) {
+
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new IllegalArgumentException("잘못 입력했습니다"));
 
         if (reviewId == null) {
             throw new NoSuchElementException("해당하는 리뷰가 존재하지 않습니다");
