@@ -1,7 +1,9 @@
 package tours.tourism.user;
 
+import jakarta.validation.constraints.NotNull;
+
 public record LoginRequestDto(
-        String email,
-        String password
+        @NotNull String email,
+        @NotNull String password
 ) {
 }
