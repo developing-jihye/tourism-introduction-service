@@ -44,7 +44,12 @@ public class User {
 
     // 비밀번호 같은지 확인하는 함수
     public boolean authenticate(String password) {
-        String hashedInputPassword = SecurityUtils.sha256Encrypt(password);
-        return this.password.equals(hashedInputPassword);
+        String hashedPassword = SecurityUtils.sha256Encrypt(password);
+        return this.password.equals(hashedPassword);
+    }
+
+    // 비밀번호 변경하는 함수
+    public void changePassword(String password) {
+        this.password = SecurityUtils.sha256Encrypt(password);
     }
 }
