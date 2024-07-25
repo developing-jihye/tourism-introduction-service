@@ -7,3 +7,4 @@ public record LoginRequestDto(
         @NotNull String password
 ) {
 }
+
