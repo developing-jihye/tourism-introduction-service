@@ -38,7 +38,7 @@ public class Place {
 
     private String website;
 
-    private double rating;
+    private Double rating;
 
     @ColumnDefault(value = "0") // 추가된 부분 ( 리뷰 전체 개수 컬럼 )
     private int reviewCount;
@@ -92,7 +92,7 @@ public class Place {
         return website;
     }
 
-    public double getRating() {
+    public Double getRating() {
         return rating;
     }
 
@@ -137,7 +137,7 @@ public class Place {
 
     }
 
-    public void setRating(double rating) { // 추가한 부분
+    public void setRating(Double rating) { // 추가한 부분
         this.rating = rating;
     }
 
